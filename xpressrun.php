@@ -27,7 +27,6 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 		{   
 			public function __construct()
 			{
-				add_action('init', array( $this, 'register_session' ) );
 				add_action('init', array($this, 'createApiConnectors'));
 				add_action('init', array($this, 'createDatabaseXp'));
 				add_action('woocommerce_shipping_init', array( $this, 'init' ) );
@@ -50,15 +49,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 			public function createApiConnectors(){
 				$xp_access_endpoints = new Xpressrun_access_endpoints();
 			}
-			/**
-			 *  Register a session
-			 */
-			public function register_session()
-			{
-				if (session_status() == PHP_SESSION_NONE && !headers_sent())
-					session_start();
-					session_write_close();
-			}	
+			
 			/**
 			 * Add a new integration to WooCommerce.
 			 * @param $methods
